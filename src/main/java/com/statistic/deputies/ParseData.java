@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class ParseData {
 
     @Autowired
-    DeputatRepository deputatRepository;
+    private DeputatRepository deputatRepository;
 
     @PostConstruct
     public void initDb() throws CsvValidationException {
