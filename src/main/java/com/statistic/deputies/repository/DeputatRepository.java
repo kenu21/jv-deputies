@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface DeputatRepository extends JpaRepository<Deputat, Long> {
 
     @Query(value = "SELECT d FROM Deputat d WHERE d.rada = :rada")
-    public List<Deputat> getDeputiesByCollocation(@Param("rada") Integer rada);
+    public List<Deputat> getDeputiesByConvocation(@Param("rada") Integer rada);
 }

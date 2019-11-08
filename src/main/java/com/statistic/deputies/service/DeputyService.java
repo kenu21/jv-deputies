@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DeputyService {
 
-    List<Deputat> getDeputiesByCollocation(Integer rada);
+    List<Deputat> getDeputiesByConvocation(Integer rada);
 }

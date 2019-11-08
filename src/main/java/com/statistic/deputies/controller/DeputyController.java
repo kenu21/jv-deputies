@@ -17,11 +17,11 @@ public class DeputyController {
     @Autowired
     private DeputyService deputyService;
 
-    @GetMapping("/getDeputiesByCollocation/{rada}")
+    @GetMapping("/getDeputiesByConvocation/{rada}")
     public List<Deputat> deputiesByCollocation(@PathVariable("rada") Integer rada) {
-        if (deputyService.getDeputiesByCollocation(rada).isEmpty()) {
+        if (deputyService.getDeputiesByConvocation(rada).isEmpty()) {
             throw new EntityNotFoundException("Invalid collocation number input");
         }
-        return deputyService.getDeputiesByCollocation(rada);
+        return deputyService.getDeputiesByConvocation(rada);
     }
 }

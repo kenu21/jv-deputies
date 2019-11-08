@@ -13,7 +13,7 @@ public class DeputyServiceImpl implements DeputyService {
     private DeputatRepository deputatRepository;
 
     @Override
-    public List<Deputat> getDeputiesByCollocation(Integer rada) {
-        return deputatRepository.getDeputiesByCollocation(rada);
+    public List<Deputat> getDeputiesByConvocation(Integer rada) {
+        return deputatRepository.getDeputiesByConvocation(rada);
     }
 }
