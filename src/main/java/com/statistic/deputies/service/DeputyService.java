@@ -7,4 +7,8 @@ import java.util.List;
 public interface DeputyService {
 
     List<Deputat> getDeputiesByConvocation(Integer rada);
+
+    List<Deputat> getNotPoliticians();
+
+    List<Deputat> getDeputiesWithAwards();
 }

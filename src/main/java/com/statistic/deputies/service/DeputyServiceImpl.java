@@ -16,4 +16,14 @@ public class DeputyServiceImpl implements DeputyService {
     public List<Deputat> getDeputiesByConvocation(Integer rada) {
         return deputatRepository.getDeputiesByConvocation(rada);
     }
+
+    @Override
+    public List<Deputat> getNotPoliticians() {
+        return deputatRepository.getNotPoliticians();
+    }
+
+    @Override
+    public List<Deputat> getDeputiesWithAwards() {
+        return deputatRepository.getDeputiesWithAwards();
+    }
 }

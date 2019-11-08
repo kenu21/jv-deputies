@@ -8,6 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface DeputatRepository extends JpaRepository<Deputat, Long> {
 
-    @Query(value = "SELECT d FROM Deputat d WHERE d.rada = :rada")
-    public List<Deputat> getDeputiesByConvocation(@Param("rada") Integer rada);
+    @Query("SELECT d FROM Deputat d WHERE d.rada = :rada")
+    List<Deputat> getDeputiesByConvocation(@Param("rada") Integer rada);
+
+    @Query("SELECT deputy FROM Deputat deputy WHERE deputy.activity NOT LIKE '%політик%'")
+    List<Deputat> getNotPoliticians();
+
+    @Query("SELECT deputy FROM Deputat deputy WHERE deputy.awards <> ''")
+    List<Deputat> getDeputiesWithAwards();
 }
