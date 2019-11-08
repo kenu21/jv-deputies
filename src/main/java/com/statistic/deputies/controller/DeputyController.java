@@ -19,6 +19,7 @@ public class DeputyController {
 
     @GetMapping("/getDeputiesByConvocation/{rada}")
     public List<Deputat> deputiesByCollocation(@PathVariable("rada") Integer rada) {
+
         if (deputyService.getDeputiesByConvocation(rada).isEmpty()) {
             throw new EntityNotFoundException("Invalid collocation number input");
         }
