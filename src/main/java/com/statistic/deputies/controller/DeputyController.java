@@ -24,4 +24,14 @@ public class DeputyController {
         }
         return deputyService.getDeputiesByConvocation(rada);
     }
+
+    @GetMapping("/notPoliticians")
+    public List<Deputat> notPoliticians() {
+        return deputyService.getNotPoliticians();
+    }
+
+    @GetMapping("/awarded")
+    public List<Deputat> deputiesWithAwards() {
+        return deputyService.getDeputiesWithAwards();
+    }
 }

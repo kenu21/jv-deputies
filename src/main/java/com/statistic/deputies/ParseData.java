@@ -37,7 +37,7 @@ public class ParseData {
             deputat.setParty(deputies.get(i).get(2));
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("d.MM.yyyy");
-            LocalDate localDate = null;
+            LocalDate localDate;
             try {
                 localDate = LocalDate.parse(deputies.get(i).get(7), dateTimeFormatter);
             } catch (DateTimeParseException e) {
