@@ -11,9 +11,7 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
     @Query("SELECT d FROM Deputat d WHERE d.rada = :rada")
     List<Deputat> getDeputiesByConvocation(@Param("rada") Integer rada);
 
-    @Query("SELECT deputy FROM Deputat deputy WHERE deputy.activity NOT LIKE '%політик%'")
-    List<Deputat> getNotPoliticians();
+    List<Deputat> findByActivityNotLike(String activity);
 
-    @Query("SELECT deputy FROM Deputat deputy WHERE deputy.awards <> ''")
-    List<Deputat> getDeputiesWithAwards();
+    List<Deputat> findByAwardsNot(String awards);
 }

@@ -11,4 +11,5 @@ public interface DeputyService {
     List<Deputat> getNotPoliticians();
 
     List<Deputat> getDeputiesWithAwards();
+
 }

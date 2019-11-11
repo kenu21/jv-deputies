@@ -19,11 +19,11 @@ public class DeputyServiceImpl implements DeputyService {
 
     @Override
     public List<Deputat> getNotPoliticians() {
-        return deputatRepository.getNotPoliticians();
+        return deputatRepository.findByActivityNotLike("%політик%");
     }
 
     @Override
     public List<Deputat> getDeputiesWithAwards() {
-        return deputatRepository.getDeputiesWithAwards();
+        return deputatRepository.findByAwardsNot("");
     }
 }
