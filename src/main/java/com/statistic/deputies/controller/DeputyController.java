@@ -39,7 +39,7 @@ public class DeputyController {
         return deputyService.getDeputiesWithAwards();
     }
 
-    @GetMapping("/getAllDeputiesGroupByParty")
+    @GetMapping("/getGroupedByParty")
     public List<Deputat> getAllDeputiesGroupByParty(@RequestParam String startWork,
                                                     @RequestParam String endWork) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
