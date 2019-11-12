@@ -14,4 +14,12 @@ public interface DeputyService {
     List<Deputat> getDeputiesWithAwards();
 
     List<Deputat> getAllDeputiesGroupByParty(LocalDate start, LocalDate end);
+
+    List<Deputat> getDeputiesNotUkrainian();
+
+    List<String> getPartiesByConvocation(Integer rada);
+
+    List<Deputat> getDeputiesWithShortestActiveTerms();
+
+    Deputat save(Deputat deputat);
 }

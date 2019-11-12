@@ -16,7 +16,7 @@ public class DeputyServiceImpl implements DeputyService {
 
     @Override
     public List<Deputat> getDeputiesByConvocation(Integer rada) {
-        return deputatRepository.getDeputiesByConvocation(rada);
+        return deputatRepository.findByRada(rada);
     }
 
     @Override
@@ -32,5 +32,25 @@ public class DeputyServiceImpl implements DeputyService {
     @Override
     public List<Deputat> getAllDeputiesGroupByParty(LocalDate start, LocalDate end) {
         return deputatRepository.getAllDeputiesGroupByParty(start, end);
+    }
+
+    @Override
+    public List<Deputat> getDeputiesNotUkrainian() {
+        return deputatRepository.getDeputiesNotUkrainian();
+    }
+
+    @Override
+    public List<String> getPartiesByConvocation(Integer rada) {
+        return deputatRepository.getPartiesByConvocation(rada);
+    }
+
+    @Override
+    public List<Deputat> getDeputiesWithShortestActiveTerms() {
+        return deputatRepository.getDeputiesWithShortestActiveTerms();
+    }
+
+    @Override
+    public Deputat save(Deputat deputat) {
+        return deputatRepository.save(deputat);
     }
 }
