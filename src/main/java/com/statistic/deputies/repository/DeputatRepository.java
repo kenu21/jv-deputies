@@ -20,12 +20,7 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
     List<Deputat> getAllDeputiesGroupByParty(@Param("startWork") LocalDate startWork,
                                              @Param("endWork") LocalDate endWork);
 
-    @Query(value = "SELECT d FROM Deputat d WHERE UPPER(d.nationality) "
-            + "NOT LIKE 'УКРАЇН%'")
-    public List<Deputat> getDeputiesNotUkrainian();
-
-    @Query(value = "SELECT DISTINCT d.party FROM Deputat d WHERE d.rada =:rada")
-    List<String> getPartiesByConvocation(@Param("rada") Integer rada);
+    List<Deputat> findByNationalityIgnoreCaseNotLike(String nationality);
 
     @Query(value = "SELECT d FROM Deputat d WHERE d.endWork IS NOT NULL "
             + "ORDER BY d.endWork - d.startWork")

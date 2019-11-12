@@ -5,6 +5,9 @@ import com.statistic.deputies.repository.DeputatRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,12 +39,14 @@ public class DeputyServiceImpl implements DeputyService {
 
     @Override
     public List<Deputat> getDeputiesNotUkrainian() {
-        return deputatRepository.getDeputiesNotUkrainian();
+        return deputatRepository.findByNationalityIgnoreCaseNotLike("УКРАЇН%");
     }
 
     @Override
     public List<String> getPartiesByConvocation(Integer rada) {
-        return deputatRepository.getPartiesByConvocation(rada);
+        return deputatRepository.findByRada(rada).stream()
+                .map(Deputat::getParty).distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
