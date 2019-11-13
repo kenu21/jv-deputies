@@ -4,7 +4,6 @@ import com.statistic.deputies.entity.Deputat;
 import com.statistic.deputies.repository.DeputatRepository;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +73,7 @@ public class DeputyServiceImpl implements DeputyService {
         return switchers.keySet().stream()
                 .filter(name -> switchers.get(name).equals(Collections.max(switchers.values())))
                 .map(name -> deputatRepository.findByName(name))
-                .flatMap(Collection::stream)
+                .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
 
