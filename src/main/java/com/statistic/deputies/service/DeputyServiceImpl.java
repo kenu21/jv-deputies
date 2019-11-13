@@ -2,8 +2,13 @@ package com.statistic.deputies.service;
 
 import com.statistic.deputies.entity.Deputat;
 import com.statistic.deputies.repository.DeputatRepository;
+
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +54,28 @@ public class DeputyServiceImpl implements DeputyService {
     @Override
     public List<Deputat> getDeputiesWithShortestActiveTerms() {
         return deputatRepository.getDeputiesWithShortestActiveTerms();
+    }
+
+    @Override
+    public List<Deputat> getKpiAndNauGraduates() {
+        return deputatRepository.findByEduLikeOrEduLike(
+                "%Київський політехнічний інститут%", "%Національний авіаційний університет%");
+    }
+
+    @Override
+    public List<Deputat> getMainPartySwitchers() {
+        Map<String, Integer> switchers = new HashMap<>();
+        deputatRepository.findAll().stream()
+                .map(Deputat::getName)
+                .forEach(name -> switchers.put(name, deputatRepository.findByName(name).stream()
+                        .map(Deputat::getParty)
+                        .collect(Collectors.toSet())
+                        .size()));
+        return switchers.keySet().stream()
+                .filter(name -> switchers.get(name).equals(Collections.max(switchers.values())))
+                .map(name -> deputatRepository.findByName(name))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     @Override

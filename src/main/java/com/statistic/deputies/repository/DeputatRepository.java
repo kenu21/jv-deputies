@@ -25,4 +25,8 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
     @Query(value = "SELECT d FROM Deputat d WHERE d.endWork IS NOT NULL "
             + "ORDER BY d.endWork - d.startWork")
     List<Deputat> getDeputiesWithShortestActiveTerms();
+
+    List<Deputat> findByEduLikeOrEduLike(String uni1, String uni2);
+
+    List<Deputat> findByName(String name);
 }

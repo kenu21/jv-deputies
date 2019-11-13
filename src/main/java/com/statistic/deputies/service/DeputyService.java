@@ -21,5 +21,9 @@ public interface DeputyService {
 
     List<Deputat> getDeputiesWithShortestActiveTerms();
 
+    List<Deputat> getKpiAndNauGraduates();
+
+    List<Deputat> getMainPartySwitchers();
+
     Deputat save(Deputat deputat);
 }

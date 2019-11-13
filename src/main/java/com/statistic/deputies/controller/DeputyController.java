@@ -67,6 +67,16 @@ public class DeputyController {
         return deputyService.getDeputiesWithShortestActiveTerms();
     }
 
+    @GetMapping("/fromKpiOrNau")
+    public List<Deputat> graduatedFromKpiOrNau() {
+        return deputyService.getKpiAndNauGraduates();
+    }
+
+    @GetMapping("/partySwitchers")
+    public List<Deputat> mainPartySwitchers() {
+        return deputyService.getMainPartySwitchers();
+    }
+
     @PostMapping("/add")
     public void add(@RequestBody DeputatDto deputatDto) {
         deputyService.save(DeputatDtoUtil.deputatFromDto(deputatDto));
