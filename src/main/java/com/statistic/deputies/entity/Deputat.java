@@ -34,5 +34,5 @@ public class Deputat {
     private String awards;
 
     @Column(columnDefinition = "TEXT")
-    private String edu;
+    private String education;
 }
