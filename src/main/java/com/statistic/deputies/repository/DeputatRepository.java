@@ -26,7 +26,7 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
             + "ORDER BY d.endWork - d.startWork")
     List<Deputat> getDeputiesWithShortestActiveTerms();
 
-    List<Deputat> findByEduContaining(String university);
+    List<Deputat> findByEducationContaining(String university);
 
     List<Deputat> findByName(String name);
 }

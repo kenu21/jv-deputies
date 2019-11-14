@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -58,12 +57,12 @@ public class DeputyServiceImpl implements DeputyService {
 
     @Override
     public List<Deputat> getDeputiesByUniversityGraduated(String university) {
-        return deputatRepository.findByEduContaining(university);
+        return deputatRepository.findByEducationContaining(university);
     }
 
     @Override
     public List<Deputat> getMainPartySwitchers() {
-        List<Deputat> deputies =  deputatRepository.findAll(Sort.by("name"));
+        List<Deputat> deputies =  deputatRepository.findAll();
         Map<String, Integer> switchers = new HashMap<>();
         deputies.stream()
                 .map(Deputat::getName)

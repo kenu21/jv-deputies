@@ -33,6 +33,6 @@ public class Deputat {
     @Column(columnDefinition = "TEXT")
     private String awards;
 
-    @Column(columnDefinition = "TEXT")
-    private String edu;
+    @Column(name = "edu", columnDefinition = "TEXT")
+    private String education;
 }

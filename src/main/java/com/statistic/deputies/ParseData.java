@@ -59,7 +59,7 @@ public class ParseData {
                 deputat.setNationality(deputies.get(i).get(14));
                 deputat.setActivity(deputies.get(i).get(15));
                 deputat.setAwards(deputies.get(i).get(21));
-                deputat.setEdu(deputies.get(i).get(24));
+                deputat.setEducation(deputies.get(i).get(24));
                 Deputat savedDeputata = deputatRepository.save(deputat);
             }
         }
