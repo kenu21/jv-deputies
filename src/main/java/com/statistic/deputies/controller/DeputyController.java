@@ -67,9 +67,9 @@ public class DeputyController {
         return deputyService.getDeputiesWithShortestActiveTerms();
     }
 
-    @GetMapping("/fromKpiOrNau")
-    public List<Deputat> graduatedFromKpiOrNau() {
-        return deputyService.getKpiAndNauGraduates();
+    @GetMapping("/byUniversity")
+    public List<Deputat> deputiesByUniversityGraduated(@RequestParam String university) {
+        return deputyService.getDeputiesByUniversityGraduated(university);
     }
 
     @GetMapping("/partySwitchers")

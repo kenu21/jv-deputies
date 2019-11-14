@@ -57,9 +57,8 @@ public class DeputyServiceImpl implements DeputyService {
     }
 
     @Override
-    public List<Deputat> getKpiAndNauGraduates() {
-        return deputatRepository.findByEduLikeOrEduLike(
-                "%Київський політехнічний інститут%", "%Національний авіаційний університет%");
+    public List<Deputat> getDeputiesByUniversityGraduated(String university) {
+        return deputatRepository.findByEduContaining(university);
     }
 
     @Override

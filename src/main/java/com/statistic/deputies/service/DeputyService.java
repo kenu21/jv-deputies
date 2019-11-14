@@ -21,7 +21,7 @@ public interface DeputyService {
 
     List<Deputat> getDeputiesWithShortestActiveTerms();
 
-    List<Deputat> getKpiAndNauGraduates();
+    List<Deputat> getDeputiesByUniversityGraduated(String university);
 
     List<Deputat> getMainPartySwitchers();
 
