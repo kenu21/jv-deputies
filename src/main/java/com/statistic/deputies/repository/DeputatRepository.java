@@ -31,4 +31,6 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
     List<Deputat> findByEducationContaining(String university);
 
     List<Deputat> findByName(String name);
+
+    List<Deputat> findByNationalityIgnoreCaseLike(String nationality);
 }

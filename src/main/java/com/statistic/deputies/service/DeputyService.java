@@ -19,6 +19,8 @@ public interface DeputyService {
 
     List<Deputat> getDeputiesNotUkrainian();
 
+    List<Deputat> getDeputiesByNationality(String nationality);
+
     List<String> getPartiesByConvocation(Integer rada);
 
     List<Deputat> getDeputiesWithShortestActiveTerms(Integer page, Integer size);
