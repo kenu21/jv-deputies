@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Ukraine Deputy API</title>
 </head>
 <body>
-
+<h2>Deputies of Verkhovna Rada of Ukraine Deputy Statistics API</h2>
+<h3>Available requests:</h3>
+<p>/deputy - view all deputies, select page: /deputy?page=INSERT_PAGE_NUMBER, 10 deputies per page</p>
+<p>/deputy/byConvocation/INSERT_CONVOCATION_NUMBER - view all deputies by convocation number</p>
+<p>/deputy/notPoliticians - view all deputies whose major proficiency is not politician</p>
+<p>/deputy/awarded - view deputies possessing various awards</p>
+<p>/deputy/getGroupedByParty - view deputies sorted by party affiliation</p>
+<p>/deputy/notUkrainian - view deputies whose nationality is not Ukrainian</p>
+<p>/deputy/byNationality/INSERT_NATIONALITY - view deputies by nationality, possible requests "українець", "укр" etc.</p>
+<p>/deputy/partiesByConvocation/INSERT_CONVOCATION_NUMBER - view political parties within single parliament convocation</p>
+<p>/deputy/leastActiveTerms - view deputies with shortest terms of parliament activity, select page: /deputy/leastActiveTerms?page=INSERT_PAGE_NUMBER, 10 deputies per page</p>
+<p>/deputy/byUniversity/INSERT_UNIVERSITY_NAME - view deputies graduated from particular university, possible requests: "КПІ", "НАУ", etc.</p>
+<p>/deputy/partySwitchers - view deputies who changed their party affiliation most frequently</p>
+<h3><a href = "/swagger-ui.html">Swagger UI</a></h3>
 </body>
 </html>

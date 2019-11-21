@@ -69,6 +69,12 @@ public class DeputyController {
         return deputyService.getDeputiesNotUkrainian();
     }
 
+    @GetMapping("/byNationality/{nationality}")
+    public List<Deputat> deputiesByNationality(@PathVariable("nationality")
+                                                       String nationality) {
+        return deputyService.getDeputiesByNationality("%" + nationality + "%");
+    }
+
     @GetMapping("/partiesByConvocation/{rada}")
     public List<String> partiesByConvocation(@PathVariable("rada") Integer rada) {
         return deputyService.getPartiesByConvocation(rada);
