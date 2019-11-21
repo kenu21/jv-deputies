@@ -52,6 +52,11 @@ public class DeputyServiceImpl implements DeputyService {
     }
 
     @Override
+    public List<Deputat> getDeputiesByNationality(String nationality) {
+        return deputatRepository.findByNationalityIgnoreCaseLike(nationality);
+    }
+
+    @Override
     public List<String> getPartiesByConvocation(Integer rada) {
         return deputatRepository.findByRada(rada).stream()
                 .map(Deputat::getParty).distinct()

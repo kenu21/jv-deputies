@@ -10,32 +10,37 @@
 
 # <a name="purpose"></a>Project purpose
 API providing detailed statistics on Political Groups and People's Deputies of Verkhovna Rada of Ukraine, featuring next criteria: 
-   * deputy's activity period 
-   * number of political groups participated in
+   * activity period 
+   * political groups participated in
    * parliament convocation number
    * education
    * nationality
-   * awards possessed   
-   * and many other   
+   * awards possessed      
    <hr>
    
 # <a name="structure"></a>Project structure
-   * Java 11
+   * Java 12
    * Maven 4.0.0
-   * ...to be fullfilled later
+   * Spring boot 2.2
+   * Spring data JPA
+   * Swagger2 2.9.2
+   * Lombok
+   * JUnit 4
+   * h2 database
+   * opencsv 5.0
    <hr>
    
 # <a name="developer-start"></a>For developers
-Open the project in your IDE.
-    
-Add it as maven project.
-
-...to be continued
-
+1. Open the project in your IDE.    
+2. Add it as maven project.
+3. If you are going to run the project as docker image from local port, fill <docker.image.prefix> tag with your docker id.
+4. Run the project. 
+5. Authenticate via next credentials,  **login:** ***admin***, **password:** ***12345***.
+6. Available url commands with instructions will be viewed on index page. 
 
 <hr>
 
 # <a name="authors"></a>Authors
-   * [Iurii](https://github.com/kenu21)
-   * [Roman](https://github.com/RomanMinevich)
-   * [Heorhii](https://github.com/gkhrshch)
+   * [Iurii](https://github.com/kenu21), [linkedin](https://www.linkedin.com/in/iurii-keniu-39188759/)   
+   * [Roman](https://github.com/RomanMinevich), [linkedin](https://www.linkedin.com/in/roman-minevich-401a2b152/)
+   * [Heorhii](https://github.com/gkhrshch), [linkedin](https://www.linkedin.com/in/heorhii-khrushchov-ba6b01197/)

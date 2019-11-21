@@ -24,6 +24,8 @@ public interface DeputatRepository extends JpaRepository<Deputat, Long> {
 
     List<Deputat> findByNationalityIgnoreCaseNotLike(String nationality);
 
+    List<Deputat> findByNationalityIgnoreCaseLike(String nationality);
+
     @Query(value = "SELECT d FROM Deputat d WHERE d.endWork IS NOT NULL "
             + "ORDER BY d.endWork - d.startWork")
     Page<Deputat> getDeputiesWithShortestActiveTerms(Pageable pageable);
