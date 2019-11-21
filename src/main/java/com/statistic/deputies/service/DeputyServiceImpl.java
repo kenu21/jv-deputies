@@ -1,5 +1,7 @@
 package com.statistic.deputies.service;
 
+import static org.springframework.data.domain.PageRequest.of;
+
 import com.statistic.deputies.entity.Deputat;
 import com.statistic.deputies.repository.DeputatRepository;
 
@@ -19,18 +21,24 @@ public class DeputyServiceImpl implements DeputyService {
     private DeputatRepository deputatRepository;
 
     @Override
+    public List<Deputat> getAllDeputies(Integer page, Integer size) {
+        return deputatRepository.findAll(of(page, size)).getContent();
+    }
+
+    @Override
     public List<Deputat> getDeputiesByConvocation(Integer rada) {
         return deputatRepository.findByRada(rada);
     }
 
     @Override
-    public List<Deputat> getNotPoliticians() {
-        return deputatRepository.findByActivityNotLike("%політик%");
+    public List<Deputat> getNotPoliticians(Integer page, Integer size) {
+        return deputatRepository.findByActivityNotLike(
+                "%політик%", of(page, size)).getContent();
     }
 
     @Override
-    public List<Deputat> getDeputiesWithAwards() {
-        return deputatRepository.findByAwardsNot("");
+    public List<Deputat> getDeputiesWithAwards(Integer page, Integer size) {
+        return deputatRepository.findByAwardsNot("", of(page, size)).getContent();
     }
 
     @Override
@@ -51,8 +59,8 @@ public class DeputyServiceImpl implements DeputyService {
     }
 
     @Override
-    public List<Deputat> getDeputiesWithShortestActiveTerms() {
-        return deputatRepository.getDeputiesWithShortestActiveTerms();
+    public List<Deputat> getDeputiesWithShortestActiveTerms(Integer page, Integer size) {
+        return deputatRepository.getDeputiesWithShortestActiveTerms(of(page, size)).getContent();
     }
 
     @Override

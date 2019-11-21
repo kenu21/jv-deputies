@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface DeputyService {
 
+    List<Deputat> getAllDeputies(Integer page, Integer size);
+
     List<Deputat> getDeputiesByConvocation(Integer rada);
 
-    List<Deputat> getNotPoliticians();
+    List<Deputat> getNotPoliticians(Integer page, Integer size);
 
-    List<Deputat> getDeputiesWithAwards();
+    List<Deputat> getDeputiesWithAwards(Integer page, Integer size);
 
     List<Deputat> getAllDeputiesGroupByParty(LocalDate start, LocalDate end);
 
@@ -19,7 +21,7 @@ public interface DeputyService {
 
     List<String> getPartiesByConvocation(Integer rada);
 
-    List<Deputat> getDeputiesWithShortestActiveTerms();
+    List<Deputat> getDeputiesWithShortestActiveTerms(Integer page, Integer size);
 
     List<Deputat> getDeputiesByUniversityGraduated(String university);
 

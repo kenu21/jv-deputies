@@ -25,22 +25,34 @@ public class DeputyController {
     @Autowired
     private DeputyService deputyService;
 
+    @GetMapping
+    public List<Deputat> allDeputies(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return deputyService.getAllDeputies(page, size);
+    }
+
     @GetMapping("/byConvocation/{rada}")
-    public List<Deputat> deputiesByCollocation(@PathVariable("rada") Integer rada) {
-        if (deputyService.getDeputiesByConvocation(rada).isEmpty()) {
+    public List<Deputat> deputiesByConvocation(@PathVariable("rada") Integer rada) {
+        List<Deputat> deputies = deputyService.getDeputiesByConvocation(rada);
+        if (deputies.isEmpty()) {
             throw new EntityNotFoundException("Invalid convocation number input");
         }
-        return deputyService.getDeputiesByConvocation(rada);
+        return deputies;
     }
 
     @GetMapping("/notPoliticians")
-    public List<Deputat> notPoliticians() {
-        return deputyService.getNotPoliticians();
+    public List<Deputat> notPoliticians(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return deputyService.getNotPoliticians(page, size);
     }
 
     @GetMapping("/awarded")
-    public List<Deputat> deputiesWithAwards() {
-        return deputyService.getDeputiesWithAwards();
+    public List<Deputat> deputiesWithAwards(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return deputyService.getDeputiesWithAwards(page, size);
     }
 
     @GetMapping("/getGroupedByParty")
@@ -63,8 +75,10 @@ public class DeputyController {
     }
 
     @GetMapping("/leastActiveTerms")
-    public List<Deputat> deputiesWithShortestActiveTerms() {
-        return deputyService.getDeputiesWithShortestActiveTerms();
+    public List<Deputat> deputiesWithShortestActiveTerms(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return deputyService.getDeputiesWithShortestActiveTerms(page, size);
     }
 
     @GetMapping("/byUniversity")
