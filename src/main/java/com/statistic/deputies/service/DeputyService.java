@@ -1,33 +1,33 @@
 package com.statistic.deputies.service;
 
-import com.statistic.deputies.entity.Deputat;
+import com.statistic.deputies.entity.Deputy;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface DeputyService {
 
-    List<Deputat> getAllDeputies(Integer page, Integer size);
+    List<Deputy> getAllDeputies(Integer page, Integer size);
 
-    List<Deputat> getDeputiesByConvocation(Integer rada);
+    List<Deputy> getDeputiesByConvocation(Integer rada);
 
-    List<Deputat> getNotPoliticians(Integer page, Integer size);
+    List<Deputy> getNotPoliticians(Integer page, Integer size);
 
-    List<Deputat> getDeputiesWithAwards(Integer page, Integer size);
+    List<Deputy> getDeputiesWithAwards(Integer page, Integer size);
 
-    List<Deputat> getAllDeputiesGroupByParty(LocalDate start, LocalDate end);
+    List<Deputy> getAllDeputiesGroupByParty(LocalDate start, LocalDate end);
 
-    List<Deputat> getDeputiesNotUkrainian();
+    List<Deputy> getDeputiesNotUkrainian(Integer page, Integer size);
 
-    List<Deputat> getDeputiesByNationality(String nationality);
+    List<Deputy> getDeputiesByNationality(String nationality);
 
     List<String> getPartiesByConvocation(Integer rada);
 
-    List<Deputat> getDeputiesWithShortestActiveTerms(Integer page, Integer size);
+    List<Deputy> getDeputiesWithShortestActiveTerms(Integer page, Integer size);
 
-    List<Deputat> getDeputiesByUniversityGraduated(String university);
+    List<Deputy> getDeputiesByUniversityGraduated(String university);
 
-    List<Deputat> getMainPartySwitchers();
+    List<Deputy> getMainPartySwitchers();
 
-    Deputat save(Deputat deputat);
+    Deputy save(Deputy deputy);
 }

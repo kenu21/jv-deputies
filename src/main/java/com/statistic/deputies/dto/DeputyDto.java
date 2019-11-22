@@ -1,41 +1,39 @@
 package com.statistic.deputies.dto;
 
 import java.time.LocalDate;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-public class DeputatDto {
+public class DeputyDto {
+
     @NotNull
-    @NotEmpty
+    @Positive
     private Integer rada;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     private String name;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     private String party;
 
-    @NotNull
-    @NotEmpty
     private LocalDate startWork;
 
-    @NotNull
-    @NotEmpty
     private LocalDate endWork;
 
     @NotNull
-    @NotEmpty
+    @NotBlank
     private String nationality;
 
-    public DeputatDto(Integer rada, String name,
-                      String party, LocalDate startWork,
-                      LocalDate endWork, String nationality) {
+    public DeputyDto(Integer rada, String name, String party,
+                     LocalDate startWork, LocalDate endWork, String nationality) {
+        if (startWork == null || (endWork != null && endWork.isBefore(startWork))) {
+            throw new IllegalArgumentException("Invalid dates of seat input");
+        }
         this.rada = rada;
         this.name = name;
         this.party = party;
