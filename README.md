@@ -42,7 +42,7 @@ Project is also available as [docker hub image](https://hub.docker.com/r/1248294
 open cmd/bash\
 docker login (input your docker id and password if you aren't logged in)\
 docker pull 12482946421/jv-deputies\
-docker run 12482946421/jv-deputies:latest\
+docker run -p 8080:8080 12482946421/jv-deputies:latest\
 check localhost:8080\
 stop the application with ctrl+c in cmd\
 don't forget to stop the docker container:\
