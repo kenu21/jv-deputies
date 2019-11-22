@@ -82,13 +82,13 @@ public class DeputyServiceImpl implements DeputyService {
     @Override
     public List<Deputy> getMainPartySwitchers() {
         List<Deputy> deputies =  deputyRepository.findAll();
-        Map<String, Integer> switchers = new HashMap<>();
+        Map<String, Long> switchers = new HashMap<>();
         deputies.stream()
                 .map(Deputy::getName)
                 .forEach(name -> switchers.put(name, deputyRepository.findByName(name).stream()
                         .map(Deputy::getParty)
-                        .collect(Collectors.toSet())
-                        .size()));
+                        .distinct()
+                        .count()));
         return deputies.stream()
                 .filter(deputy -> switchers.get(deputy.getName())
                         .equals(Collections.max(switchers.values())))
@@ -96,7 +96,7 @@ public class DeputyServiceImpl implements DeputyService {
     }
 
     @Override
-    public Deputy save(Deputy deputy) {
+    public Deputy addDeputy(Deputy deputy) {
         return deputyRepository.save(deputy);
     }
 }

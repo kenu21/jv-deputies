@@ -29,5 +29,5 @@ public interface DeputyService {
 
     List<Deputy> getMainPartySwitchers();
 
-    Deputy save(Deputy deputy);
+    Deputy addDeputy(Deputy deputy);
 }

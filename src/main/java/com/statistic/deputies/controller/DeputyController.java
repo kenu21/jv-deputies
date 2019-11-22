@@ -106,7 +106,7 @@ public class DeputyController {
     }
 
     @PostMapping("/add")
-    public void add(@Valid @RequestBody DeputyDto deputyDto) {
-        deputyService.save(deputyFromDto(deputyDto));
+    public void addDeputy(@Valid @RequestBody DeputyDto deputyDto) {
+        deputyService.addDeputy(deputyFromDto(deputyDto));
     }
 }
