@@ -1,14 +1,16 @@
 package com.statistic.deputies.controller;
 
-import com.statistic.deputies.dto.DeputatDto;
-import com.statistic.deputies.dto.DeputatDtoUtil;
-import com.statistic.deputies.entity.Deputat;
+import static com.statistic.deputies.dto.DeputyDtoUtil.deputyFromDto;
+
+import com.statistic.deputies.dto.DeputyDto;
+import com.statistic.deputies.entity.Deputy;
 import com.statistic.deputies.service.DeputyService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,15 +28,15 @@ public class DeputyController {
     private DeputyService deputyService;
 
     @GetMapping
-    public List<Deputat> allDeputies(
+    public List<Deputy> allDeputies(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return deputyService.getAllDeputies(page, size);
     }
 
     @GetMapping("/byConvocation/{rada}")
-    public List<Deputat> deputiesByConvocation(@PathVariable("rada") Integer rada) {
-        List<Deputat> deputies = deputyService.getDeputiesByConvocation(rada);
+    public List<Deputy> deputiesByConvocation(@PathVariable("rada") Integer rada) {
+        List<Deputy> deputies = deputyService.getDeputiesByConvocation(rada);
         if (deputies.isEmpty()) {
             throw new EntityNotFoundException("Invalid convocation number input");
         }
@@ -42,22 +44,22 @@ public class DeputyController {
     }
 
     @GetMapping("/notPoliticians")
-    public List<Deputat> notPoliticians(
+    public List<Deputy> notPoliticians(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return deputyService.getNotPoliticians(page, size);
     }
 
     @GetMapping("/awarded")
-    public List<Deputat> deputiesWithAwards(
+    public List<Deputy> deputiesWithAwards(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return deputyService.getDeputiesWithAwards(page, size);
     }
 
     @GetMapping("/getGroupedByParty")
-    public List<Deputat> getAllDeputiesGroupByParty(@RequestParam String startWork,
-                                                    @RequestParam String endWork) {
+    public List<Deputy> getAllDeputiesGroupByParty(@RequestParam String startWork,
+                                                   @RequestParam String endWork) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate start = LocalDate.parse(startWork, dateTimeFormatter);
         LocalDate end = LocalDate.parse(endWork, dateTimeFormatter);
@@ -65,40 +67,46 @@ public class DeputyController {
     }
 
     @GetMapping("/notUkrainian")
-    public List<Deputat> deputiesNotUkrainian() {
-        return deputyService.getDeputiesNotUkrainian();
+    public List<Deputy> deputiesNotUkrainian(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return deputyService.getDeputiesNotUkrainian(page, size);
     }
 
     @GetMapping("/byNationality/{nationality}")
-    public List<Deputat> deputiesByNationality(@PathVariable("nationality")
+    public List<Deputy> deputiesByNationality(@PathVariable("nationality")
                                                        String nationality) {
-        return deputyService.getDeputiesByNationality("%" + nationality + "%");
+        return deputyService.getDeputiesByNationality(nationality);
     }
 
     @GetMapping("/partiesByConvocation/{rada}")
     public List<String> partiesByConvocation(@PathVariable("rada") Integer rada) {
-        return deputyService.getPartiesByConvocation(rada);
+        List<String> parties = deputyService.getPartiesByConvocation(rada);
+        if (parties.isEmpty()) {
+            throw new EntityNotFoundException("Invalid convocation number input");
+        }
+        return parties;
     }
 
     @GetMapping("/leastActiveTerms")
-    public List<Deputat> deputiesWithShortestActiveTerms(
+    public List<Deputy> deputiesWithShortestActiveTerms(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "10") Integer size) {
         return deputyService.getDeputiesWithShortestActiveTerms(page, size);
     }
 
     @GetMapping("/byUniversity")
-    public List<Deputat> deputiesByUniversityGraduated(@RequestParam String university) {
+    public List<Deputy> deputiesByUniversityGraduated(@RequestParam String university) {
         return deputyService.getDeputiesByUniversityGraduated(university);
     }
 
     @GetMapping("/partySwitchers")
-    public List<Deputat> mainPartySwitchers() {
+    public List<Deputy> mainPartySwitchers() {
         return deputyService.getMainPartySwitchers();
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody DeputatDto deputatDto) {
-        deputyService.save(DeputatDtoUtil.deputatFromDto(deputatDto));
+    public void add(@Valid @RequestBody DeputyDto deputyDto) {
+        deputyService.save(deputyFromDto(deputyDto));
     }
 }

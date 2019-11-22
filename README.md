@@ -38,6 +38,16 @@ API providing detailed statistics on Political Groups and People's Deputies of V
 5. Authenticate via next credentials,  **login:** ***admin***, **password:** ***12345***.
 6. Available url commands with instructions will be viewed on index page. 
 
+Project is also available as [docker hub image](https://hub.docker.com/r/12482946421/jv-deputies):  
+open cmd/bash\
+docker login (input your docker id and password if you aren't logged in)\
+docker pull 12482946421/jv-deputies\
+docker run 12482946421/jv-deputies:latest\
+check localhost:8080\
+stop the application with ctrl+c in cmd\
+don't forget to stop the docker container:\
+docker ps\
+docker stop container_name
 <hr>
 
 # <a name="authors"></a>Authors

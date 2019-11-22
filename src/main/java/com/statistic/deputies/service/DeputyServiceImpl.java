@@ -2,8 +2,8 @@ package com.statistic.deputies.service;
 
 import static org.springframework.data.domain.PageRequest.of;
 
-import com.statistic.deputies.entity.Deputat;
-import com.statistic.deputies.repository.DeputatRepository;
+import com.statistic.deputies.entity.Deputy;
+import com.statistic.deputies.repository.DeputyRepository;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -18,69 +18,75 @@ import org.springframework.stereotype.Service;
 public class DeputyServiceImpl implements DeputyService {
 
     @Autowired
-    private DeputatRepository deputatRepository;
+    private final DeputyRepository deputyRepository;
 
-    @Override
-    public List<Deputat> getAllDeputies(Integer page, Integer size) {
-        return deputatRepository.findAll(of(page, size)).getContent();
+    public DeputyServiceImpl(DeputyRepository deputyRepository) {
+        this.deputyRepository = deputyRepository;
     }
 
     @Override
-    public List<Deputat> getDeputiesByConvocation(Integer rada) {
-        return deputatRepository.findByRada(rada);
+    public List<Deputy> getAllDeputies(Integer page, Integer size) {
+        return deputyRepository.findAll(of(page, size)).getContent();
     }
 
     @Override
-    public List<Deputat> getNotPoliticians(Integer page, Integer size) {
-        return deputatRepository.findByActivityNotLike(
+    public List<Deputy> getDeputiesByConvocation(Integer rada) {
+        return deputyRepository.findByRada(rada);
+    }
+
+    @Override
+    public List<Deputy> getNotPoliticians(Integer page, Integer size) {
+        return deputyRepository.findByActivityNotLike(
                 "%політик%", of(page, size)).getContent();
     }
 
     @Override
-    public List<Deputat> getDeputiesWithAwards(Integer page, Integer size) {
-        return deputatRepository.findByAwardsNot("", of(page, size)).getContent();
+    public List<Deputy> getDeputiesWithAwards(Integer page, Integer size) {
+        return deputyRepository.findByAwardsNotNullAndAwardsNot("", of(page, size))
+                .getContent();
     }
 
     @Override
-    public List<Deputat> getAllDeputiesGroupByParty(LocalDate start, LocalDate end) {
-        return deputatRepository.getAllDeputiesGroupByParty(start, end);
+    public List<Deputy> getAllDeputiesGroupByParty(LocalDate start, LocalDate end) {
+        return deputyRepository.findAllDeputiesGroupByParty(start, end);
     }
 
     @Override
-    public List<Deputat> getDeputiesNotUkrainian() {
-        return deputatRepository.findByNationalityIgnoreCaseNotLike("УКРАЇН%");
+    public List<Deputy> getDeputiesNotUkrainian(Integer page, Integer size) {
+        return deputyRepository.findByNationalityIgnoreCaseNotLike("УКРАЇН%", of(page, size))
+                .getContent();
     }
 
     @Override
-    public List<Deputat> getDeputiesByNationality(String nationality) {
-        return deputatRepository.findByNationalityIgnoreCaseLike(nationality);
+    public List<Deputy> getDeputiesByNationality(String nationality) {
+        return deputyRepository.findByNationalityIgnoreCaseContaining(nationality);
     }
 
     @Override
     public List<String> getPartiesByConvocation(Integer rada) {
-        return deputatRepository.findByRada(rada).stream()
-                .map(Deputat::getParty).distinct()
+        return deputyRepository.findByRada(rada).stream()
+                .map(Deputy::getParty).distinct()
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Deputat> getDeputiesWithShortestActiveTerms(Integer page, Integer size) {
-        return deputatRepository.getDeputiesWithShortestActiveTerms(of(page, size)).getContent();
+    public List<Deputy> getDeputiesWithShortestActiveTerms(Integer page, Integer size) {
+        return deputyRepository.findDeputiesWithShortestActiveTerms(of(page, size)).getContent();
     }
 
     @Override
-    public List<Deputat> getDeputiesByUniversityGraduated(String university) {
-        return deputatRepository.findByEducationContaining(university);
+    public List<Deputy> getDeputiesByUniversityGraduated(String university) {
+        return deputyRepository.findByEducationContaining(university);
     }
 
     @Override
-    public List<Deputat> getMainPartySwitchers() {
-        List<Deputat> deputies =  deputatRepository.findAll();
+    public List<Deputy> getMainPartySwitchers() {
+        List<Deputy> deputies =  deputyRepository.findAll();
         Map<String, Integer> switchers = new HashMap<>();
         deputies.stream()
-                .map(Deputat::getName)
-                .forEach(name -> switchers.put(name, deputatRepository.findByName(name).stream()
-                        .map(Deputat::getParty)
+                .map(Deputy::getName)
+                .forEach(name -> switchers.put(name, deputyRepository.findByName(name).stream()
+                        .map(Deputy::getParty)
                         .collect(Collectors.toSet())
                         .size()));
         return deputies.stream()
@@ -90,7 +96,7 @@ public class DeputyServiceImpl implements DeputyService {
     }
 
     @Override
-    public Deputat save(Deputat deputat) {
-        return deputatRepository.save(deputat);
+    public Deputy save(Deputy deputy) {
+        return deputyRepository.save(deputy);
     }
 }

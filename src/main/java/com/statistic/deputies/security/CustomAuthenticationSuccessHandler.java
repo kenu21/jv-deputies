@@ -1,7 +1,6 @@
 package com.statistic.deputies.security;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
@@ -13,8 +12,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication)
-            throws IOException, ServletException {
-
+            throws IOException {
         httpServletResponse.sendRedirect("index");
     }
 }
