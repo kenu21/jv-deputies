@@ -21,6 +21,7 @@ API providing detailed statistics on Political Groups and People's Deputies of V
 # <a name="structure"></a>Project structure
    * Java 12
    * Maven 4.0.0
+   * Travis CI
    * Spring boot 2.2
    * Spring data JPA
    * Swagger2 2.9.2
